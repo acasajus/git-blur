@@ -20,7 +20,7 @@ end
 
  
 task :release => :build do
-    system "gem push git-blur-#{GitBlur::VERSION}"
+    system "gem push git-blur-#{GitBlur::VERSION}.gem"
 end
 
 task :default  => :spec
