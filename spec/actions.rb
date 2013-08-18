@@ -17,9 +17,15 @@ describe "Actions tests" do
   it 'Should test if directory is a git dir' do
     cmd = GitBlur::Actions 
     expect{ cmd.new( true, @work_dir ) }.to raise_error( "#{File.realpath @work_dir} does not seem to be a git repo" )
-    git_run( @work_dir, [ 'git init', 'date > fn', 'git add fn', 'git commit -m "C1"', 'date >> fn' ] )
+    git_run( @work_dir, [ 'git init', 
+                          'git config --local user.email "you@example.com"',
+                          'git config --local user.name "Your Name"',
+                          'date > fn', 
+                          'git add fn', 
+                          'git commit -m "C1"', 
+                          'date >> fn' ] )
     expect{ cmd.new( true, @work_dir ) }.to raise_error( "Your repo is dirty. Please commit or stash your changes" )
-    git_run( @work_dir, 'git reset --hard HEAD' )
+    git_run( @work_dir, "git checkout -f HEAD -- #{@work_dir}" )
     cmd.new( true, @work_dir )
   end
 
@@ -29,7 +35,12 @@ describe "Actions tests" do
       $stdin = pout
       $stdout = File.new( "/dev/null", "w" )
       cmd = GitBlur::Actions 
-      git_run( @work_dir, [ 'git init', 'date > fn', 'git add fn', 'git commit -m "C1"' ]  )
+      git_run( @work_dir, [ 'git init', 
+                            'git config --local user.email "you@example.com"',
+                            'git config --local user.name "Your Name"',
+                            'date > fn', 
+                            'git add fn', 
+                            'git commit -m "C1"' ]  )
       pin.write( "mypass\nmypass\n" )
       c = cmd.new( true, @work_dir )
       c.init

@@ -1,5 +1,4 @@
 require 'base64'
-require 'io/console'
 require 'openssl'
 
 module GitBlur

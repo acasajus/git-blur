@@ -1,5 +1,8 @@
-require 'io/console'
 require 'openssl'
+begin
+  require 'io/console'
+rescue
+end
 
 module GitBlur
   module KeyGen
@@ -65,13 +68,13 @@ module GitBlur
           puts "Enter your password:"
           begin
             pass1 = $stdin.noecho(&:gets)
-          rescue Errno::ENOTTY
+          rescue Errno::ENOTTY, Errno::EINVAL
             pass1 = $stdin.gets
           end
           puts "Enter it again:"
           begin
             pass2 = $stdin.noecho(&:gets)
-          rescue Errno::ENOTTY
+          rescue Errno::ENOTTY, Errno::EINVAL
             pass2 = $stdin.gets
           end
 
