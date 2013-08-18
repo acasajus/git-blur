@@ -1,7 +1,7 @@
 require 'openssl'
 begin
   require 'io/console'
-rescue
+rescue LoadError
 end
 
 module GitBlur
