@@ -13,7 +13,7 @@ Installing git-blur
 
 git-blur is packed as a gem. Just run:
 
- $ gem install git-blur 
+    $ gem install git-blur 
 
 and it should do the trick.
 
@@ -22,21 +22,21 @@ Using git-blur
 
 First you need to generate a key file
 
- $ git blur init
+    $ git blur init
 
 It will ask for your password twice to generate your key file. From then just create a .gitattributes file specifying which files to encrypt:
 
- $ cat .gitattributes
- secretfile filter=git-blur diff=git-blur
- *.key filter=git-crypt diff=git-crypt
+    $ cat .gitattributes
+    secretfile filter=git-blur diff=git-blur
+    *.key filter=git-crypt diff=git-crypt
 
 The .gitattributes file should be committed into the repository but make sure you *DON'T ENCRYPT* the .gitattributes file. 
 
 To retrieve a repo with already encrypted files just:
  
- $ git clone /path/to/repo
- $ cd repo
- $ git blur init
+    $ git clone /path/to/repo
+    $ cd repo
+    $ git blur init
 
 After generating the keyfile git should unencrypt automatically all encrypted files.
 
