@@ -28,7 +28,7 @@ It will ask for your password twice to generate your key file. From then just cr
 
     $ cat .gitattributes
     secretfile filter=git-blur diff=git-blur
-    *.key filter=git-crypt diff=git-crypt
+    *.key filter=git-blur diff=git-blur
 
 The .gitattributes file should be committed into the repository but make sure you *DON'T ENCRYPT* the .gitattributes file. 
 
